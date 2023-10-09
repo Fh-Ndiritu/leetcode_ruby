@@ -1,6 +1,6 @@
 # @param {Integer[]} nums
 # @param {Integer} target
-# @return {Integer}
+# # @return {Integer}
 def search_insert(nums, target)
     get_index(nums, target, 0)
 
@@ -21,10 +21,10 @@ end
 
 
 
-def search_insert_2(nums, target)
-
-    nums.bsearch_index{|num| num == target}
+def search_insert(nums, target)
+    index = nums.bsearch_index{|num| num >= target}
+    index.nil? ? nums.length : index
 end
 
-p search_insert_2([1,3,5,6],0)
-# p search_insert([1,3,5,6], 2)
+
+https://leetcode.com/problems/search-insert-position/solutions/4151295/two-line-ruby-solution/
