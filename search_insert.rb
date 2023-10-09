@@ -20,5 +20,11 @@ def get_index(arr, target, index)
 end
 
 
-p search_insert([1,3,5,6],0)
+
+def search_insert_2(nums, target)
+
+    nums.bsearch_index{|num| num == target}
+end
+
+p search_insert_2([1,3,5,6],0)
 # p search_insert([1,3,5,6], 2)
