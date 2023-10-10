@@ -20,4 +20,10 @@ def str_str(haystack, needle)
 
 end
 
-p str_str("leetcode","leeto")
+def str_str(haystack, needle)
+    index =  haystack.index(needle)
+    index.nil? ? -1 : index
+end
+
+
+https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/solutions/4153594/ruby-inbuilt-index-solution-and-long-solution/
