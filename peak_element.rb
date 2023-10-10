@@ -15,6 +15,11 @@ def find_peak_element(nums)
     left 
 end
 
+def find_peak_element(nums)
+    n = nums.length-1
+    (0..n).bsearch{|i| i == n || nums[i] > nums[i+1]}
+end
 
 
+https://leetcode.com/problems/find-peak-element/solutions/4153491/beats-100-in-ruby-with-explanation/
 
