@@ -1,19 +1,16 @@
 # @param {String} corridor
 # @return {Integer}
-def number_of_ways(corridor)
-    #loop from start to end
-    #each two S mean substring
-    #more than two subsequent S - one way 
-    #if S is full and followed by P - find combinations
-
-
+MOD = (10**9)+7
+def number_of_ways(corridor) #O(n)
     i = 0
     seats = 0
-    ways = []
-    tally = corridor.chars.tally
+    ways = 1
 
+    tally = corridor.chars.tally #O(n)
     return 0 if tally["S"].to_i < 2 || tally["S"].odd?
-    while i < corridor.length 
+
+
+    while i < corridor.length  #O(n)
         if corridor[i] == "S"
             seats +=1
         elsif seats.even?
@@ -27,17 +24,21 @@ def number_of_ways(corridor)
                 end
                 i = k-1
 
-                ways << plants+1
+                p MOD
+                ways = (ways * (plants+1)) % MOD
             end
         end
 
         i += 1
     end
 
-    no_of_ways =  ways.inject(1){ |product, way| product*way % (10**9+7)}
-    no_of_ways
+   ways
     
 end
 
 
 p number_of_ways("SPPPPPPPSPPPSPSSSPPPPPPPPPPPPPPPPPSPPPPPPPPPPPPPPPPSPPPPPSPSPPPPPPSPSPPSPSPPPSPSPPSSPPPPPSPPSSPP")
+
+
+
+
