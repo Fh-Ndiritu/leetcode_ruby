@@ -19,6 +19,8 @@ l2 = ListNode.new(5, l22)
 # @param {ListNode} l2
 # @return {ListNode}
 def add_two_numbers(l1, l2)
+    p l1.size
+    exit;
     a1, a2 = [], []
     n1s = l1
     while n1s
