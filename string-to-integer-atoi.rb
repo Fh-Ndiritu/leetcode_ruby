@@ -38,7 +38,7 @@ end
 
 
 p my_atoi("+1")
-p my_atoi("words and 987")
+p my_atoi("w22ords and 987")
 
 # p my_atoi(" -392 skh is ")
 # p my_atoi("42")
