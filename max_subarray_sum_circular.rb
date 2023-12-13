@@ -1,22 +1,25 @@
 # @param {Integer[]} nums
 # @return {Integer}
+# https://leetcode.com/problems/maximum-sum-circular-subarray/solutions/4398433/fully-explained-ruby-solution-using-some-nice-observations/
 def max_subarray_sum_circular(nums)
-    max_global = -Float::INFINITY
 
-    i = 0 
-    while i < nums.size 
-        arr = nums.rotate(i)
-        max_current = 0 
-        arr.each_with_index do |num, i|
-            max_current = [num, max_current+num].max
-            max_global = [max_current, max_global].max
-        end
+    max_global = max_current = min_global = min_current = sum = nums[0]
 
-        i += 1
+    (1).upto(nums.size-1).each do |index|
+        max_current = [nums[index], max_current+nums[index]].max
+        max_global = [max_current, max_global].max
+
+        min_current = [nums[index], min_current+nums[index]].min 
+        min_global  = [min_current, min_global].min
+        sum += nums[index]
     end
 
 
-    max_global
+    return max_global if max_global < 0 
+    return [max_global, (sum-min_global)].max
+    
 end
 
 p max_subarray_sum_circular([5,-3,5])
+p max_subarray_sum_circular([1,-2,3,-2])
+p max_subarray_sum_circular([-3,-2,-3])
