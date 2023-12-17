@@ -21,14 +21,16 @@ class FoodRatings
             rating = ratings[i]
 
             # kimchi = 9
-            foods_map[food] = [rating, cuisine]
+            foods_map[food] = {cuisine => rating}
 
             # korean = [kimchi]
-            (cuisines_map[cuisine] ||= []) << [food, rating]
+            (cuisines_map[cuisine] ||= {})[food] =  rating
 
             i += 1
         end
 
+        p cuisines_map
+        exit
     end
 
 
