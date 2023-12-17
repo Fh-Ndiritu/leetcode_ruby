@@ -1,75 +1,50 @@
-#rating should be modifiable and the max easy to return
-#return highest rated food by cuisine
-
-#store foods in an easy to access way by food_name, hash??
-#store foods in an easy to access way by cuisine
-
-#foods should be ordered by rating, how??
-#rating is key and food is array of foods??
-
+# https://leetcode.com/problems/design-a-food-rating-system/solutions/4417926/beats-100-using-ruby-maps-fully-explained/
 class FoodRatings
 
-    attr_accessor :foods_map, :cuisines_map, :ratings
+    attr_accessor :the_foods, :the_cuisines, :the_ratings
     
     def initialize(foods, cuisines, ratings)
         i = 0 
-        self.foods_map = {}
-        self.cuisines_map = {}
+        self.the_foods = {}
+        self.the_ratings = {}
+        self.the_cuisines = {}
         while i < foods.length
-            food = foods[i]
-            cuisine = cuisines[i]
-            rating = ratings[i]
-
-            # kimchi = 9
-            foods_map[food] = {cuisine => rating}
-
-            # korean = [kimchi]
-            (cuisines_map[cuisine] ||= {})[food] =  rating
-
+            the_foods[foods[i]] =   {cuisine: cuisines[i], rating: ratings[i]}
+            (the_ratings[ratings[i]] ||= []) << {food: foods[i], cuisine: cuisines[i]}
+            (the_cuisines[cuisines[i]]  ||= {})[foods[i]] = ratings[i]
             i += 1
         end
 
-        p cuisines_map
-        exit
     end
 
 
     def change_rating(food, new_rating)
-        cuisine = foods_map[food][1]
-        cuisines_map[cuisine].delete([food, foods_map[food][0]])
-        
-        foods_map[food][0] = new_rating 
-        cuisines_map[cuisine] <<  [food, new_rating]
+        old_rating =  the_foods[food][:rating] 
+        the_foods[food][:rating]  = new_rating
+
+        cuisine = the_foods[food][:cuisine]
+        the_cuisines[cuisine][food] = new_rating
+        the_ratings[old_rating].delete({food: food, cuisine: cuisine})
+        (the_ratings[new_rating] ||= []) << {food: food, cuisine: cuisine}
         return nil
 
     end
 
 
     def highest_rated(cuisine)
-        foods = cuisines_map[cuisine]
-        max_rated = foods.first
-        foods[1..].each do |food|
-            if food.last > max_rated.last
-                max_rated = food
-            elsif food.last == max_rated.last
-                max_lex = [food.first, max_rated.first].sort.first
-                max_rated = max_lex == food.first ? food : max_rated
-            end
-        end
-        return max_rated.first
+        foods = the_cuisines[cuisine]
+        rate =  foods.values.max
+        foods = the_ratings[rate].select{|rate| rate[:cuisine] == cuisine}.sort_by{|rate| rate[:food]}
+        foods.first[:food]
+
     end
 
 
 end
 
-# Your FoodRatings object will be instantiated and called as such:
-# obj = FoodRatings.new(foods, cuisines, ratings)
-# obj.change_rating(food, new_rating)
-# param_2 = obj.highest_rated(cuisine)
-
 foods = ["kimchi", "miso", "sushi", "moussaka", "ramen", "bulgogi"]
 cuisines = ["korean", "japanese", "japanese", "greek", "japanese", "korean"]
-ratings = [9, 12, 8, 15, 14, 7]
+ratings = [9, 12, 9, 15, 14, 9]
 
 obj = FoodRatings.new(foods, cuisines, ratings)
 p obj.highest_rated("korean")
