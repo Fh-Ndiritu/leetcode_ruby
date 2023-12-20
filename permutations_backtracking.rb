@@ -1,7 +1,7 @@
 # @param {Integer[]} nums
 # @return {Integer[][]}
 def permute(nums)
-
+# https://leetcode.com/problems/permutations/solutions/4424688/awesome-ruby-oneliner-explained-backtracking/
     def perm(comb, nums)
         return [comb.dup] if nums.empty?
 
