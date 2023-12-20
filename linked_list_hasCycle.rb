@@ -9,18 +9,17 @@ end
 
 # @param {ListNode} head
 # @return {Boolean}
+# https://leetcode.com/problems/linked-list-cycle/solutions/4429665/intuitive-solution-using-ruby-object-ids-explained/
 def hasCycle(head)
     return false if head.nil?
-    object_ids = []
-    node_next = head.next 
-    object_ids << head.object_id
-
-    while  node_next
-        id = node_next.object_id
-        return true if object_ids.include?(id)
-        object_ids << id
-        node_next = node_next.next
-        
+    
+    node = head 
+    object_ids = {}
+    while node
+        id = node.object_id
+        return true if object_ids[id]
+        object_ids[id] = true
+        node = node.next
     end
 
     return false
