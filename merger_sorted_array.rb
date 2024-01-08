@@ -23,7 +23,16 @@ def merge(nums1, m, nums2, n)
 
 end
 
-p merge( [1,2,3,0,0,0, 0], 3, [1, 5, 6, 7], 4)
-p merge([1], 1, [], 0)
-p merge([0], 0, [1], 1)
-p merge([0, 0], 0, [1, 2], 2)
+
+def merge(nums1, m, nums2, n)
+    (nums1[0...m].concat(nums1[m..]=nums2))
+    nums1.sort!
+end
+nums1 =  [1,2,3,0,0,0]
+p merge(nums1, 3, [2, 5, 6], 3)
+p nums1
+
+
+# p merge([1], 1, [], 0)
+# p merge([0], 0, [1], 1)
+# p merge([0, 0], 2, [1, 2], 2)
