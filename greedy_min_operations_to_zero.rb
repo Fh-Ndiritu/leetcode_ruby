@@ -1,23 +1,30 @@
 # @param {Integer[]} nums
 # @return {Integer}
-def minimum_operations(nums)
-    nums = nums.uniq.select{|i| i > 0}.sort
-    return 0 unless !nums.empty?
+# def minimum_operations(nums)
+#     nums = nums.uniq.select{|i| i > 0}.sort
+#     return 0 unless !nums.empty?
 
-    diffed = 0 
-    max = nums.last 
+#     diffed = 0 
+#     max = nums.last 
 
-    i = 0 
-    while max > 0 
-        val = nums[i]-diffed
-        max -= val
-        diffed = nums[i]
-        i += 1
-    end
+#     i = 0 
+#     while max > 0 
+#         val = nums[i]-diffed
+#         max -= val
+#         diffed = nums[i]
+#         i += 1
+#     end
 
-    return i 
+#     return i 
     
+# end
+
+def minimum_operations(nums)
+    nums.uniq.reject{|i| i < 1}.count
 end
+
+
+
 p minimum_operations([1,3,2,2,3,4,1,1,4])
 p minimum_operations([0, 0 ])
 p minimum_operations([1,5,0,3,5])
