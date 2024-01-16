@@ -101,6 +101,12 @@ def find_kth_largest(nums, k)
 end
 
 
+def find_kth_largest(nums, k )
+    require 'priority_queue'
+    qu =  PriorityQueue.new
+    p qu
+end
+
 
 
 p find_kth_largest([3,2,1,5,6,4], 2)

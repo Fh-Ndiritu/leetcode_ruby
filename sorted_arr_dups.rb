@@ -7,8 +7,11 @@ def remove_duplicates(nums)
         if nums[i] == current 
             count += 1 
             if count > 2 
-                last = nums[i..].rindex(nums[i])+i
-                nums[i..] = nums[last+1..]
+                k = i+1 
+                while nums[k] == nums[i]
+                    k += 1
+                end
+                nums[i..] = nums[k..]
                 count = 1
             end
         else 
